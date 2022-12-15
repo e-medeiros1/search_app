@@ -1,14 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
-import 'custom_widgets/left_form_field.dart';
-import 'custom_widgets/right_form_field.dart';
+import '../../theme/text_form_field_theme.dart';
 
 // ignore: must_be_immutable
 class SearchRow extends StatefulWidget {
-  String label;
-  Function()? onTap;
+  Function()? onPressed;
   Function(String)? onChanged;
-  SearchRow({Key? key, required this.onTap, required this.onChanged, required this.label})
+  final Function()? onTap;
+  String label;
+  TextEditingController idController;
+  TextEditingController nameCompanyController;
+
+  SearchRow(
+      {Key? key,
+      required this.onChanged,
+      this.onTap,
+      this.onPressed,
+      required this.idController,
+      required this.nameCompanyController,
+      required this.label})
       : super(key: key);
 
   @override
@@ -16,21 +27,60 @@ class SearchRow extends StatefulWidget {
 }
 
 class _SearchRowState extends State<SearchRow> {
-  final textNumberController = TextEditingController();
-  final textCompanyController = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          LeftFormField(
-              textNumberController: textNumberController, widget: widget),
-          const Icon(Icons.search, color: Colors.black, size: 34),
-          RightFormField(
-              widget: widget, textCompanyController: textCompanyController, label: widget.label,),
+          SizedBox(
+            width: MediaQuery.of(context).size.width * .2,
+            child: TextFormField(
+              textAlign: TextAlign.center,
+              autofocus: true,
+              keyboardType: TextInputType.number,
+              inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+              decoration: textFormFieldTheme,
+              controller: widget.idController,
+              onChanged: widget.onChanged,
+            ),
+          ),
+          IconButton(
+            icon: const Icon(Icons.search, color: Colors.black87, size: 34),
+            onPressed: widget.onPressed,
+          ),
+          Row(
+            children: [
+              SizedBox(
+                width: MediaQuery.of(context).size.width * .55,
+                child: TextFormField(
+                  readOnly: true,
+                  textAlign: TextAlign.center,
+                  decoration: textFormFieldTheme.copyWith(
+                    floatingLabelBehavior: FloatingLabelBehavior.always,
+                    label: Text.rich(
+                      TextSpan(
+                        children: [
+                          TextSpan(
+                            text: widget.label,
+                            style: const TextStyle(
+                                color: Colors.blue, fontSize: 18),
+                          ),
+                          const TextSpan(
+                            text: '*',
+                            style: TextStyle(color: Colors.red, fontSize: 18),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  onTap: widget.onTap,
+                  controller: widget.nameCompanyController,
+                ),
+              ),
+            ],
+          ),
         ],
       ),
     );

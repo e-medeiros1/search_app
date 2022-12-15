@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:search_app/app/core/ui/widgets/cabecalho_tab.dart';
+import 'package:search_app/app/controller/cabecalho_controller.dart';
+import 'package:search_app/app/pages/home/widgets/cabecalho_tab.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -10,23 +11,19 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
+  CabecalhoController controller = CabecalhoController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //AppBar
       appBar: AppBar(
-        flexibleSpace: const FlexibleSpaceBar(
-          title: Text(
-            'Pendência de Faturamento',
-            style: TextStyle(fontWeight: FontWeight.bold),
-          ),
+        flexibleSpace: FlexibleSpaceBar(
+          title: const Text('Pendência de Faturamento',
+              style: TextStyle(fontWeight: FontWeight.bold)),
           centerTitle: true,
-          titlePadding: EdgeInsetsDirectional.only(bottom: 30),
+          titlePadding: EdgeInsets.symmetric(
+              vertical: MediaQuery.of(context).size.height * .025),
         ),
-        leading: const Icon(
-          Icons.arrow_back,
-          size: 30,
-        ),
+        leading: const Icon(Icons.arrow_back, size: 30),
         toolbarHeight: MediaQuery.of(context).size.height * .09,
         elevation: 0,
         actions: const [
@@ -44,8 +41,8 @@ class _MainPageState extends State<MainPage> {
                   length: 3,
                   initialIndex: 0,
                   child: Column(
-                    children: const [
-                      TabBar(
+                    children: [
+                      const TabBar(
                         labelStyle: TextStyle(fontWeight: FontWeight.bold),
                         indicatorColor: Colors.blue,
                         labelColor: Colors.blue,
@@ -58,9 +55,9 @@ class _MainPageState extends State<MainPage> {
                       Expanded(
                         child: TabBarView(
                           children: [
-                            CabecalhoTab(),
-                            Icon(Icons.list_alt),
-                            Icon(Icons.car_repair_outlined),
+                            CabecalhoTab(controller: controller),
+                            const Icon(Icons.list_alt),
+                            const Icon(Icons.car_repair_outlined),
                           ],
                         ),
                       ),
