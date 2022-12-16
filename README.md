@@ -13,4 +13,9 @@
       <img src="https://user-images.githubusercontent.com/73318684/207787495-aa14c694-c9cd-40fc-9c34-9152d08da06d.png" width="200" alt="Resultado"/>
 </p>  
 
+<h4>Implementação com GetX</h4>  
+<p>
+      <img src="https://user-images.githubusercontent.com/73318684/208158381-ce6a4bd4-5631-4898-9663-6a95bdef6763.jpeg" width="200" alt="Resultado"/>
+</p>  
+
 
