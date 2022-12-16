@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '../../theme/text_form_field_theme.dart';
+import '../theme/text_form_field_theme.dart';
 
 // ignore: must_be_immutable
 class SearchRow extends StatefulWidget {
-  Function()? onPressed;
-  Function(String)? onChanged;
+  Function()? iconOnPressed;
+  Function(String)? idOnChanged;
   final Function()? onTap;
   String label;
   TextEditingController idController;
@@ -14,9 +14,9 @@ class SearchRow extends StatefulWidget {
 
   SearchRow(
       {Key? key,
-      this.onChanged,
+      this.idOnChanged,
       this.onTap,
-      this.onPressed,
+      this.iconOnPressed,
       required this.idController,
       required this.nameController,
       required this.label})
@@ -28,13 +28,6 @@ class SearchRow extends StatefulWidget {
 
 class _SearchRowState extends State<SearchRow> {
   @override
-  void dispose() {
-    widget.idController.dispose();
-    widget.nameController.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
@@ -44,7 +37,6 @@ class _SearchRowState extends State<SearchRow> {
           SizedBox(
             width: MediaQuery.of(context).size.width * .2,
             child: TextFormField(
-              autofocus: true,
               textAlign: TextAlign.center,
               keyboardType: TextInputType.number,
               inputFormatters: [
@@ -52,13 +44,13 @@ class _SearchRowState extends State<SearchRow> {
               ],
               decoration: textFormFieldTheme,
               controller: widget.idController,
-              onChanged: widget.onChanged,
+              onChanged: widget.idOnChanged,
             ),
           ),
           IconButton(
             padding: const EdgeInsets.only(right: 5),
             icon: const Icon(Icons.search, color: Colors.black87, size: 34),
-            onPressed: widget.onPressed,
+            onPressed: widget.iconOnPressed,
           ),
           Row(
             children: [

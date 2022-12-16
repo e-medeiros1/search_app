@@ -1,18 +1,18 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:search_app/app/models/list_company.dart';
-import 'package:search_app/app/pages/home/widgets/shearch_bottom_sheet.dart';
+import 'package:search_app/app/pages/home/cabecalho_tab/widgets/shearch_dialog.dart';
 
 import '../controller/cabecalho_controller.dart';
 
-class CustomBottomSheet {
-  customBottomSheet(
-    BuildContext context,
-    CabecalhoController controller,
-    ValueListenable listValue,
+class CustomDialog {
+  customDialog({
+    required BuildContext context,
+    required CabecalhoController controller,
+    required ValueListenable listValue,
     Function(String)? onChanged,
     Function(String)? onSubmitted,
-  ) {
+  }) {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
@@ -25,7 +25,7 @@ class CustomBottomSheet {
                   width: 300,
                   child: Column(
                     children: [
-                      ShearchBottomSheet(
+                      SearchDialog(
                         label: "Pesquise por nome ou código",
                         controllerText: controller.textController,
                         onChanged: onChanged,
@@ -38,6 +38,7 @@ class CustomBottomSheet {
                             itemCount: list.length,
                             itemBuilder: (context, index) {
                               ListCompany item = list[index];
+
                               return ListTile(
                                 title: Text(
                                   '${item.id} - ${item.name}',

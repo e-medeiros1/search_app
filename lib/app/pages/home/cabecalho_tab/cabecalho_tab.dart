@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:search_app/app/core/ui/widgets/search_row/search_row.dart';
-import 'package:search_app/app/pages/home/controller/cabecalho_controller.dart';
+import 'package:search_app/app/core/ui/widgets/search_row.dart';
+import 'package:search_app/app/pages/home/cabecalho_tab/controller/cabecalho_controller.dart';
 
-import 'custom_bottom_sheet.dart';
+import 'widgets/custom_dialog.dart';
 
 class CabecalhoTab extends StatefulWidget {
   final CabecalhoController controller;
@@ -18,7 +18,7 @@ class CabecalhoTab extends StatefulWidget {
 class _CabecalhoTabState extends State<CabecalhoTab> {
   @override
   Widget build(BuildContext context) {
-    CustomBottomSheet bottomSheet = CustomBottomSheet();
+    CustomDialog dialog = CustomDialog();
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 25),
       child: Column(
@@ -41,47 +41,47 @@ class _CabecalhoTabState extends State<CabecalhoTab> {
                   letterSpacing: 1.5)),
           const SizedBox(height: 10),
           SearchRow(
-            onPressed: () {
-              bottomSheet.customBottomSheet(
-                context,
-                widget.controller,
-                widget.controller.companyListValue,
-                widget.controller.companySearch,
-                widget.controller.searchAndSetCompany,
+            iconOnPressed: () {
+              dialog.customDialog(
+                context: context,
+                controller: widget.controller,
+                listValue: widget.controller.companyListValue,
+                onChanged: widget.controller.companySearch,
+                onSubmitted: widget.controller.searchAndSetCompany,
               );
             },
             idController: widget.controller.companyId,
             nameController: widget.controller.companyName,
-            onChanged: widget.controller.searchAndSetCompany,
+            idOnChanged: widget.controller.searchAndSetCompany,
             label: 'Empresa',
           ),
           SearchRow(
-              onPressed: () {
-                bottomSheet.customBottomSheet(
-                  context,
-                  widget.controller,
-                  widget.controller.partnerListValue,
-                  widget.controller.searchPartner,
-                  widget.controller.searchAndSetPartner,
+              iconOnPressed: () {
+                dialog.customDialog(
+                  context: context,
+                  controller: widget.controller,
+                  listValue: widget.controller.partnerListValue,
+                  onChanged: widget.controller.searchPartner,
+                  onSubmitted: widget.controller.searchAndSetPartner,
                 );
               },
               idController: widget.controller.partnerId,
               nameController: widget.controller.partnerName,
-              onChanged: widget.controller.searchAndSetPartner,
+              idOnChanged: widget.controller.searchAndSetPartner,
               label: 'Parceiro'),
           SearchRow(
-            onPressed: () {
-              bottomSheet.customBottomSheet(
-                context,
-                widget.controller,
-                widget.controller.procedureListValue,
-                widget.controller.searchProcedure,
-                widget.controller.searchAndSetProcedure,
+            iconOnPressed: () {
+              dialog.customDialog(
+                context: context,
+                controller: widget.controller,
+                listValue: widget.controller.procedureListValue,
+                onChanged: widget.controller.searchProcedure,
+                onSubmitted: widget.controller.searchAndSetProcedure,
               );
             },
             idController: widget.controller.procedureId,
             nameController: widget.controller.procedureName,
-            onChanged: widget.controller.searchAndSetProcedure,
+            idOnChanged: widget.controller.searchAndSetProcedure,
             label: 'Linha do Procedimento',
           ),
         ],

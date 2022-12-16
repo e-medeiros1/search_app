@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:search_app/app/pages/home/controller/cabecalho_controller.dart';
-import 'package:search_app/app/pages/home/widgets/cabecalho_tab.dart';
+import 'package:search_app/app/pages/home/cabecalho_tab/controller/cabecalho_controller.dart';
+import 'package:search_app/app/pages/home/cabecalho_tab/cabecalho_tab.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
