@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:search_app/app/pages/home/controller/cabecalho_controller.dart';
 import 'package:search_app/app/pages/home/widgets/cabecalho_tab.dart';
 
-class MainPage extends StatefulWidget {
-  const MainPage({Key? key}) : super(key: key);
+class HomePage extends StatefulWidget {
+  const HomePage({Key? key}) : super(key: key);
 
   @override
   // ignore: library_private_types_in_public_api
-  _MainPageState createState() => _MainPageState();
+  _HomePageState createState() => _HomePageState();
 }
 
-class _MainPageState extends State<MainPage> {
+class _HomePageState extends State<HomePage> {
   CabecalhoController controller = CabecalhoController();
   @override
   Widget build(BuildContext context) {
