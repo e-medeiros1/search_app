@@ -54,7 +54,7 @@ class CabecalhoController extends ChangeNotifier {
     if (value.isNotEmpty) {
       final listSearch = companiesList.where((e) {
         companyListValue.value.where((element) {
-          final id = element.id.toString();
+          final id = element.id.toString().toLowerCase();
           final inputId = value.toLowerCase();
           return id.contains(inputId);
         });
@@ -116,7 +116,7 @@ class CabecalhoController extends ChangeNotifier {
     if (value.isNotEmpty) {
       final listSearch = proceduresList.where((e) {
         procedureListValue.value.where((element) {
-          final id = element.id.toString();
+          final id = element.id.toString().toLowerCase();
           final inputId = value.toLowerCase();
           return id.contains(inputId);
         });

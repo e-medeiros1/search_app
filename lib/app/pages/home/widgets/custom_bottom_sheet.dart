@@ -7,7 +7,7 @@ import '../controller/cabecalho_controller.dart';
 
 class CustomBottomSheet {
   customBottomSheet(
-    context,
+    BuildContext context,
     CabecalhoController controller,
     ValueListenable listValue,
     Function(String)? onChanged,
@@ -26,7 +26,7 @@ class CustomBottomSheet {
                   child: Column(
                     children: [
                       ShearchBottomSheet(
-                        label: "Pesquise pelo nome ou código da empresa",
+                        label: "Pesquise por nome ou código",
                         controllerText: controller.textController,
                         onChanged: onChanged,
                         onSubmitted: onSubmitted,
