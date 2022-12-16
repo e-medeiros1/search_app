@@ -10,10 +10,6 @@ class CabecalhoController extends ChangeNotifier {
     ListCompany(id: 5, name: 'Empresa 5'),
   ];
 
-  get companyItems {
-    return {...companiesList};
-  }
-
   List<ListCompany> partnersList = [
     ListCompany(id: 1, name: 'Parceiro 1'),
     ListCompany(id: 2, name: 'Parceiro 2'),
@@ -71,7 +67,11 @@ class CabecalhoController extends ChangeNotifier {
     }
   }
 
+  // var allItems = [];
   searchAndSetCompany(String value) {
+    // if (value.isEmpty) {
+    //   allItems.addAll(companiesList);
+    // }
     if (value.isNotEmpty) {
       for (ListCompany model in companiesList) {
         if (model.id.toString() == value) {
