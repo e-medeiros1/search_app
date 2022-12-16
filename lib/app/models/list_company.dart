@@ -2,8 +2,10 @@
 class ListCompany {
   int id;
   String name;
+  List? fullList = [];
 
   ListCompany({
+    this.fullList,
     required this.id,
     required this.name,
   });

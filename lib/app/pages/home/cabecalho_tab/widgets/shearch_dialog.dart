@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:search_app/app/core/ui/theme/text_form_field_theme.dart';
+import 'package:search_app/app/pages/home/cabecalho_tab/controller/cabecalho_controller.dart';
 
-class ShearchBottomSheet extends StatelessWidget {
+class SearchDialog extends StatelessWidget {
   final TextEditingController? controllerText;
   final Function(String)? onChanged;
   final Function(String)? onSubmitted;
   final String? label;
   final Function()? onTap;
 
-  const ShearchBottomSheet({
+  const SearchDialog({
     Key? key,
     this.controllerText,
     this.onChanged,
