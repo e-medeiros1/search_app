@@ -27,6 +27,7 @@ class SearchRow extends StatefulWidget {
 }
 
 class _SearchRowState extends State<SearchRow> {
+  
   @override
   Widget build(BuildContext context) {
     return Padding(
