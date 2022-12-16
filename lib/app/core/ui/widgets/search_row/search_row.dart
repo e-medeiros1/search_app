@@ -10,15 +10,15 @@ class SearchRow extends StatefulWidget {
   final Function()? onTap;
   String label;
   TextEditingController idController;
-  TextEditingController nameCompanyController;
+  TextEditingController nameController;
 
   SearchRow(
       {Key? key,
-      required this.onChanged,
+      this.onChanged,
       this.onTap,
       this.onPressed,
       required this.idController,
-      required this.nameCompanyController,
+      required this.nameController,
       required this.label})
       : super(key: key);
 
@@ -27,6 +27,13 @@ class SearchRow extends StatefulWidget {
 }
 
 class _SearchRowState extends State<SearchRow> {
+  @override
+  void dispose() {
+    widget.idController.dispose();
+    widget.nameController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -37,16 +44,19 @@ class _SearchRowState extends State<SearchRow> {
           SizedBox(
             width: MediaQuery.of(context).size.width * .2,
             child: TextFormField(
-              textAlign: TextAlign.center,
               autofocus: true,
+              textAlign: TextAlign.center,
               keyboardType: TextInputType.number,
-              inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+              inputFormatters: [
+                FilteringTextInputFormatter.digitsOnly,
+              ],
               decoration: textFormFieldTheme,
               controller: widget.idController,
               onChanged: widget.onChanged,
             ),
           ),
           IconButton(
+            padding: const EdgeInsets.only(right: 5),
             icon: const Icon(Icons.search, color: Colors.black87, size: 34),
             onPressed: widget.onPressed,
           ),
@@ -76,7 +86,7 @@ class _SearchRowState extends State<SearchRow> {
                     ),
                   ),
                   onTap: widget.onTap,
-                  controller: widget.nameCompanyController,
+                  controller: widget.nameController,
                 ),
               ),
             ],

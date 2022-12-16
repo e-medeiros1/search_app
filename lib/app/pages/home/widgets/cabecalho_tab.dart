@@ -1,9 +1,8 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:search_app/app/controller/cabecalho_controller.dart';
 import 'package:search_app/app/core/ui/widgets/search_row/search_row.dart';
+import 'package:search_app/app/pages/home/controller/cabecalho_controller.dart';
 
-import '../../../core/ui/widgets/input_component.dart';
+import 'custom_bottom_sheet.dart';
 
 class CabecalhoTab extends StatefulWidget {
   final CabecalhoController controller;
@@ -19,6 +18,7 @@ class CabecalhoTab extends StatefulWidget {
 class _CabecalhoTabState extends State<CabecalhoTab> {
   @override
   Widget build(BuildContext context) {
+    CustomBottomSheet bottomSheet = CustomBottomSheet();
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 25),
       child: Column(
@@ -42,7 +42,8 @@ class _CabecalhoTabState extends State<CabecalhoTab> {
           const SizedBox(height: 10),
           SearchRow(
             onPressed: () {
-              dialogCustom(
+              bottomSheet.customBottomSheet(
+                context,
                 widget.controller,
                 widget.controller.companyListValue,
                 widget.controller.companySearch,
@@ -50,13 +51,14 @@ class _CabecalhoTabState extends State<CabecalhoTab> {
               );
             },
             idController: widget.controller.companyId,
-            nameCompanyController: widget.controller.companyName,
+            nameController: widget.controller.companyName,
             onChanged: widget.controller.searchAndSetCompany,
             label: 'Empresa',
           ),
           SearchRow(
               onPressed: () {
-                dialogCustom(
+                bottomSheet.customBottomSheet(
+                  context,
                   widget.controller,
                   widget.controller.partnerListValue,
                   widget.controller.searchPartner,
@@ -64,12 +66,13 @@ class _CabecalhoTabState extends State<CabecalhoTab> {
                 );
               },
               idController: widget.controller.partnerId,
-              nameCompanyController: widget.controller.partnerName,
+              nameController: widget.controller.partnerName,
               onChanged: widget.controller.searchAndSetPartner,
               label: 'Parceiro'),
           SearchRow(
             onPressed: () {
-              dialogCustom(
+              bottomSheet.customBottomSheet(
+                context,
                 widget.controller,
                 widget.controller.procedureListValue,
                 widget.controller.searchProcedure,
@@ -77,65 +80,12 @@ class _CabecalhoTabState extends State<CabecalhoTab> {
               );
             },
             idController: widget.controller.procedureId,
-            nameCompanyController: widget.controller.procedureName,
+            nameController: widget.controller.procedureName,
             onChanged: widget.controller.searchAndSetProcedure,
             label: 'Linha do Procedimento',
           ),
         ],
       ),
     );
-  }
-
-  void dialogCustom(
-    CabecalhoController controller,
-    ValueListenable listValue,
-    Function(String)? onChanged,
-    dynamic Function(String)? onSubmitted,
-  ) {
-    showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-              content: ValueListenableBuilder(
-                  valueListenable: listValue,
-                  builder: (context, list, widget) {
-                    return SingleChildScrollView(
-                      child: SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.5,
-                        width: 300,
-                        child: Column(
-                          children: [
-                            SearchDialogBar(
-                              border: false,
-                              label: "Pesquise pelo código ou descrição",
-                              controllerText: controller.textController,
-                              onChanged: onChanged,
-                              onSubmitted: onSubmitted,
-                            ),
-                            Expanded(
-                              child: ListView.builder(
-                                  itemCount: list.length,
-                                  physics: const NeverScrollableScrollPhysics(),
-                                  shrinkWrap: true,
-                                  itemBuilder: (context, index) {
-                                    final item = list[index];
-                                    return ListTile(
-                                      title: Text(
-                                        '${item.id} - ${item.name}',
-                                      ),
-                                      onTap: () {
-                                        controller.setValues(
-                                            id: item.id, name: item.name);
-                                        Navigator.pop(context);
-                                        controller.textController.clear();
-                                      },
-                                    );
-                                  }),
-                            ),
-                          ],
-                        ),
-                      ),
-                    );
-                  }),
-            ));
   }
 }

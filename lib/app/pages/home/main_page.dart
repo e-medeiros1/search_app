@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:search_app/app/controller/cabecalho_controller.dart';
+import 'package:search_app/app/pages/home/controller/cabecalho_controller.dart';
 import 'package:search_app/app/pages/home/widgets/cabecalho_tab.dart';
 
 class MainPage extends StatefulWidget {
@@ -21,7 +21,7 @@ class _MainPageState extends State<MainPage> {
               style: TextStyle(fontWeight: FontWeight.bold)),
           centerTitle: true,
           titlePadding: EdgeInsets.symmetric(
-              vertical: MediaQuery.of(context).size.height * .025),
+              vertical: MediaQuery.of(context).size.height * .027),
         ),
         leading: const Icon(Icons.arrow_back, size: 30),
         toolbarHeight: MediaQuery.of(context).size.height * .09,

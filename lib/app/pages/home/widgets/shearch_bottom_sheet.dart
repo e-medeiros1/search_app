@@ -1,37 +1,33 @@
 import 'package:flutter/material.dart';
+import 'package:search_app/app/core/ui/theme/text_form_field_theme.dart';
 
-class SearchDialogBar extends StatelessWidget {
+class ShearchBottomSheet extends StatelessWidget {
   final TextEditingController? controllerText;
   final Function(String)? onChanged;
   final Function(String)? onSubmitted;
   final String? label;
-  final bool? border;
   final Function()? onTap;
 
-  const SearchDialogBar({
+  const ShearchBottomSheet({
     Key? key,
     this.controllerText,
     this.onChanged,
     this.onSubmitted,
     required this.label,
-    required this.border,
     this.onTap,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(6.0),
+      padding: const EdgeInsets.only(top: 25.0, left: 15, right: 15),
       child: TextField(
+        controller: controllerText,
         onSubmitted: onSubmitted,
         onChanged: onChanged,
-        controller: controllerText,
         onTap: onTap,
-        decoration: InputDecoration(
+        decoration: textFormFieldTheme.copyWith(
           labelText: label,
-          border: border == true
-              ? OutlineInputBorder(borderRadius: BorderRadius.circular(15))
-              : null,
         ),
       ),
     );
