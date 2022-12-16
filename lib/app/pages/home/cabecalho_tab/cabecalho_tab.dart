@@ -41,6 +41,15 @@ class _CabecalhoTabState extends State<CabecalhoTab> {
                   letterSpacing: 1.5)),
           const SizedBox(height: 10),
           SearchRow(
+            onTap: () {
+              dialog.customDialog(
+                context: context,
+                controller: widget.controller,
+                listValue: widget.controller.companyListValue,
+                onChanged: widget.controller.companySearch,
+                onSubmitted: widget.controller.searchAndSetCompany,
+              );
+            },
             iconOnPressed: () {
               dialog.customDialog(
                 context: context,
@@ -56,6 +65,15 @@ class _CabecalhoTabState extends State<CabecalhoTab> {
             label: 'Empresa',
           ),
           SearchRow(
+              onTap: () {
+                dialog.customDialog(
+                  context: context,
+                  controller: widget.controller,
+                  listValue: widget.controller.partnerListValue,
+                  onChanged: widget.controller.searchPartner,
+                  onSubmitted: widget.controller.searchAndSetPartner,
+                );
+              },
               iconOnPressed: () {
                 dialog.customDialog(
                   context: context,
@@ -70,6 +88,15 @@ class _CabecalhoTabState extends State<CabecalhoTab> {
               idOnChanged: widget.controller.searchAndSetPartner,
               label: 'Parceiro'),
           SearchRow(
+            onTap: () {
+              dialog.customDialog(
+                context: context,
+                controller: widget.controller,
+                listValue: widget.controller.procedureListValue,
+                onChanged: widget.controller.searchProcedure,
+                onSubmitted: widget.controller.searchAndSetProcedure,
+              );
+            },
             iconOnPressed: () {
               dialog.customDialog(
                 context: context,
