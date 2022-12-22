@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:search_app/app/pages/home/cabecalho_tab/controller/cabecalho_controller.dart';
+import 'package:get/get.dart';
 import 'package:search_app/app/pages/home/cabecalho_tab/cabecalho_tab.dart';
 
+import 'cabecalho_tab/controller/cabecalho_controller.dart';
 import 'catalogo_tab/catalogo_tab.dart';
 
 class HomePage extends StatefulWidget {
@@ -13,7 +14,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  CabecalhoController controller = CabecalhoController();
+  var instance = Get.put(CabecalhoController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,8 +44,8 @@ class _HomePageState extends State<HomePage> {
                   length: 3,
                   initialIndex: 0,
                   child: Column(
-                    children: [
-                      const TabBar(
+                    children: const [
+                      TabBar(
                         labelStyle: TextStyle(fontWeight: FontWeight.bold),
                         indicatorColor: Colors.blue,
                         labelColor: Colors.blue,
@@ -57,9 +58,9 @@ class _HomePageState extends State<HomePage> {
                       Expanded(
                         child: TabBarView(
                           children: [
-                            CabecalhoTab(controller: controller),
+                            CabecalhoTab(),
                             CatalogoTab(),
-                            const Icon(Icons.car_repair_outlined),
+                            Icon(Icons.car_repair_outlined),
                           ],
                         ),
                       ),

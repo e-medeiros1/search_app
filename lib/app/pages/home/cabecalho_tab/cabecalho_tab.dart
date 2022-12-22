@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:search_app/app/core/ui/widgets/search_row.dart';
 import 'package:search_app/app/pages/home/cabecalho_tab/controller/cabecalho_controller.dart';
 
 import 'widgets/custom_dialog.dart';
 
 class CabecalhoTab extends StatefulWidget {
-  final CabecalhoController controller;
   const CabecalhoTab({
-    required this.controller,
     Key? key,
   }) : super(key: key);
 
@@ -16,103 +15,121 @@ class CabecalhoTab extends StatefulWidget {
 }
 
 class _CabecalhoTabState extends State<CabecalhoTab> {
+  var instance = Get.put(CabecalhoController());
+
+  @override
+  void dispose() {
+    Get.delete<CabecalhoController>();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    CustomDialog dialog = CustomDialog();
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 25),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.max,
-        children: [
-          Text(
-            'Cabeçalho de nota',
-            style: TextStyle(
-                fontSize: 19,
-                fontWeight: FontWeight.bold,
-                color: Colors.blue.shade600),
-          ),
-          const SizedBox(height: 10),
-          const Text('Preencha informações de cabeçalho do pedido',
+        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 25),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            Text(
+              'Cabeçalho de nota',
               style: TextStyle(
-                  fontSize: 17,
+                  fontSize: 19,
                   fontWeight: FontWeight.bold,
-                  color: Colors.blue,
-                  letterSpacing: 1.5)),
-          const SizedBox(height: 10),
-          SearchRow(
-            onTap: () {
-              dialog.customDialog(
-                context: context,
-                controller: widget.controller,
-                listValue: widget.controller.companyListValue,
-                onChanged: widget.controller.companySearch,
-                onSubmitted: widget.controller.searchAndSetCompany,
-              );
-            },
-            iconOnPressed: () {
-              dialog.customDialog(
-                context: context,
-                controller: widget.controller,
-                listValue: widget.controller.companyListValue,
-                onChanged: widget.controller.companySearch,
-                onSubmitted: widget.controller.searchAndSetCompany,
-              );
-            },
-            idController: widget.controller.companyId,
-            nameController: widget.controller.companyName,
-            idOnChanged: widget.controller.searchAndSetCompany,
-            label: 'Empresa',
-          ),
-          SearchRow(
-              onTap: () {
-                dialog.customDialog(
-                  context: context,
-                  controller: widget.controller,
-                  listValue: widget.controller.partnerListValue,
-                  onChanged: widget.controller.searchPartner,
-                  onSubmitted: widget.controller.searchAndSetPartner,
-                );
-              },
+                  color: Colors.blue.shade600),
+            ),
+            const SizedBox(height: 10),
+            const Text('Preencha informações de cabeçalho do pedido',
+                style: TextStyle(
+                    fontSize: 17,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.blue,
+                    letterSpacing: 1.5)),
+            const SizedBox(height: 10),
+            SearchRow(
               iconOnPressed: () {
-                dialog.customDialog(
-                  context: context,
-                  controller: widget.controller,
-                  listValue: widget.controller.partnerListValue,
-                  onChanged: widget.controller.searchPartner,
-                  onSubmitted: widget.controller.searchAndSetPartner,
+                customDialog(
+                  context,
+                  widget: ListView.builder(
+                    itemCount: instance.companiesList.length,
+                    itemBuilder: (context, index) {
+                      final list = instance.companiesList[index];
+                      return ListTile(
+                        title: Text(
+                          '${list.id} -  ${list.name}',
+                          style: const TextStyle(color: Colors.blue),
+                        ),
+                        onTap: () {
+                          instance.setValues(id: list.id, name: list.name);
+                          instance.textController.clear();
+                          Navigator.of(context).pop();
+                        },
+                      );
+                    },
+                  ),
                 );
               },
-              idController: widget.controller.partnerId,
-              nameController: widget.controller.partnerName,
-              idOnChanged: widget.controller.searchAndSetPartner,
-              label: 'Parceiro'),
-          SearchRow(
-            onTap: () {
-              dialog.customDialog(
-                context: context,
-                controller: widget.controller,
-                listValue: widget.controller.procedureListValue,
-                onChanged: widget.controller.searchProcedure,
-                onSubmitted: widget.controller.searchAndSetProcedure,
-              );
-            },
-            iconOnPressed: () {
-              dialog.customDialog(
-                context: context,
-                controller: widget.controller,
-                listValue: widget.controller.procedureListValue,
-                onChanged: widget.controller.searchProcedure,
-                onSubmitted: widget.controller.searchAndSetProcedure,
-              );
-            },
-            idController: widget.controller.procedureId,
-            nameController: widget.controller.procedureName,
-            idOnChanged: widget.controller.searchAndSetProcedure,
-            label: 'Linha do Procedimento',
-          ),
-        ],
-      ),
-    );
+              idController: instance.companyId,
+              nameController: instance.companyName,
+              idOnChanged: instance.searchAndSetCompany,
+              label: 'Empresa',
+            ),
+            SearchRow(
+                iconOnPressed: () {
+                  customDialog(
+                    context,
+                    widget: ListView.builder(
+                      itemCount: instance.partnersList.length,
+                      itemBuilder: (context, index) {
+                        final list = instance.partnersList[index];
+                        return ListTile(
+                          title: Text(
+                            '${list.id} -  ${list.name}',
+                            style: const TextStyle(color: Colors.blue),
+                          ),
+                          onTap: () {
+                            instance.setValues(id: list.id, name: list.name);
+                            instance.textController.clear();
+                            Navigator.of(context).pop();
+                          },
+                        );
+                      },
+                    ),
+                  );
+                },
+                idController: instance.partnerId,
+                nameController: instance.partnerName,
+                idOnChanged: instance.searchAndSetPartner,
+                label: 'Parceiro'),
+            SearchRow(
+              iconOnPressed: () {
+                customDialog(
+                  context,
+                  widget: ListView.builder(
+                    itemCount: instance.proceduresList.length,
+                    itemBuilder: (context, index) {
+                      final list = instance.proceduresList[index];
+                      return ListTile(
+                        title: Text(
+                          '${list.id} -  ${list.name}',
+                          style: const TextStyle(color: Colors.blue),
+                        ),
+                        onTap: () {
+                          instance.setValues(id: list.id, name: list.name);
+                          instance.textController.clear();
+                          Navigator.of(context).pop();
+                        },
+                      );
+                    },
+                  ),
+                );
+              },
+              idController: instance.procedureId,
+              nameController: instance.procedureName,
+              idOnChanged: instance.searchAndSetProcedure,
+              label: 'Linha do Procedimento',
+            ),
+          ],
+        ));
   }
 }

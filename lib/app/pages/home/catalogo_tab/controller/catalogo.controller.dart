@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:search_app/app/models/list_company.dart';
 
@@ -8,6 +9,8 @@ class CompaniesController extends GetxController {
     ListCompany(id: 3, name: 'Empresa 3'),
     ListCompany(id: 4, name: 'Empresa 4')
   ].obs;
+
+ final controllerEC = TextEditingController();
 
   final companyList = [].obs;
 

@@ -7,7 +7,7 @@ import '../theme/text_form_field_theme.dart';
 class SearchRow extends StatefulWidget {
   Function()? iconOnPressed;
   Function(String)? idOnChanged;
-  final Function()? onTap;
+  final Function()? onTextFormTap;
   String label;
   TextEditingController idController;
   TextEditingController nameController;
@@ -15,7 +15,7 @@ class SearchRow extends StatefulWidget {
   SearchRow(
       {Key? key,
       this.idOnChanged,
-      this.onTap,
+      this.onTextFormTap,
       this.iconOnPressed,
       required this.idController,
       required this.nameController,
@@ -78,7 +78,7 @@ class _SearchRowState extends State<SearchRow> {
                       ),
                     ),
                   ),
-                  onTap: widget.onTap,
+                  onTap: widget.onTextFormTap,
                   controller: widget.nameController,
                 ),
               ),

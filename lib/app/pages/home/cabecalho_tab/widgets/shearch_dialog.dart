@@ -1,21 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:search_app/app/core/ui/theme/text_form_field_theme.dart';
-import 'package:search_app/app/pages/home/cabecalho_tab/controller/cabecalho_controller.dart';
 
 class SearchDialog extends StatelessWidget {
   final TextEditingController? controllerText;
   final Function(String)? onChanged;
   final Function(String)? onSubmitted;
-  final String? label;
-  final Function()? onTap;
 
   const SearchDialog({
     Key? key,
     this.controllerText,
     this.onChanged,
     this.onSubmitted,
-    required this.label,
-    this.onTap,
   }) : super(key: key);
 
   @override
@@ -26,9 +21,8 @@ class SearchDialog extends StatelessWidget {
         controller: controllerText,
         onSubmitted: onSubmitted,
         onChanged: onChanged,
-        onTap: onTap,
         decoration: textFormFieldTheme.copyWith(
-          labelText: label,
+          labelText: 'Pesquise por nome ou código',
         ),
       ),
     );

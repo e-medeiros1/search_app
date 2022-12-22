@@ -31,6 +31,7 @@ class _CatalogoTabState extends State<CatalogoTab> {
               Padding(
                 padding: const EdgeInsets.only(top: 20.0, left: 15, right: 15),
                 child: TextField(
+                  controller: controller.controllerEC,
                   onChanged: (value) {
                     controller.filterCompanies(value);
                   },
@@ -44,11 +45,15 @@ class _CatalogoTabState extends State<CatalogoTab> {
                   separatorBuilder: (context, index) => const Divider(),
                   itemCount: controller.companyList.length,
                   itemBuilder: (context, index) {
+                    final catalogoList = controller.companyList[index];
                     return ListTile(
                       title: Text(
-                        '${controller.companyList[index].id} -  ${controller.companyList[index].name}',
+                        '${catalogoList.id} -  ${catalogoList.name}',
                         style: const TextStyle(color: Colors.blue),
                       ),
+                      onTap: () {
+                        controller.controllerEC.text = catalogoList.name;
+                      },
                     );
                   },
                 ),
